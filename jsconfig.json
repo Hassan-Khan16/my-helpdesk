@@ -3,5 +3,8 @@
     "paths": {
       "@/*": ["./*"]
     }
-  }
+  },
+"files.associations": {
+  "*.css": "tailwindcss"
+}
 }
