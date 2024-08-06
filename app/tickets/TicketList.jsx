@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-async function getTickets() {
+async function getTickets() {   
     const res = await fetch('http://localhost:4000/tickets', {
         next: {
             revalidate: 0 // use 0 to disable using cached data

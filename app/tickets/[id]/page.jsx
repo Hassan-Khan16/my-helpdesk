@@ -1,11 +1,30 @@
-import React from 'react'
+import { notFound } from 'next/navigation';
+import React from 'react';
+import { resolve } from 'styled-jsx/css';
+
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+    const res = await fetch('http://localhost:4000/tickets')
+
+    const tickets = await res.json()
+
+    return tickets.map(ticket => ({
+        id: ticket.id,
+    }))
+}
 
 async function getTicket(id) {
     const res = await fetch('http://localhost:4000/tickets/' + id, {
         next: {
-            revalidate: 0 // use 0 to disable using cached data
+            revalidate: 60 // use 0 to disable using cached data
         }
     })
+
+    if (!res.ok) {
+        notFound()
+    }
+    
     return res.json()
 }
 
